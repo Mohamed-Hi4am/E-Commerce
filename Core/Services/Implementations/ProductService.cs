@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Services.Implementations
 {
-    public class ProductService(IUnitOfWork _unitOfWork, IMapper _mapper) : IProductService
+    internal class ProductService(IUnitOfWork _unitOfWork, IMapper _mapper) : IProductService
     {
         public async Task<IEnumerable<BrandResultDto>> GetAllBrandsAsync()
         {
