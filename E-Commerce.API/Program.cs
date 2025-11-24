@@ -48,8 +48,9 @@ namespace E_Commerce.API
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseStaticFiles();
 
+            app.UseAuthorization();
 
             app.MapControllers(); 
             #endregion
