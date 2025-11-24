@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Persistence.Data;
 using Persistence.Repositories;
 using Services;
+using Services.Abstraction.Contracts;
+using Services.Implementations;
 
 namespace E_Commerce.API
 {
@@ -22,7 +24,10 @@ namespace E_Commerce.API
             builder.Services.AddControllers();
             builder.Services.AddScoped<IDbInitializer, DbInitializer>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IServiceManager, ServiceManager>();
+
             builder.Services.AddAutoMapper(o => { }, typeof(AssemblyReference).Assembly);
+
             
             // Swagger
             builder.Services.AddEndpointsApiExplorer();
