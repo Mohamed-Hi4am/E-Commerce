@@ -12,8 +12,12 @@ namespace Domain.Contracts
     {
         // Get All
         Task<IEnumerable<TEntity>> GetAllAsync(bool asNoTracking = false);
+        // Get All overload
+        public Task<IEnumerable<TEntity>> GetAllAsync(ISpecifications<TEntity, TKey> specifications);
         // Get by Id
         Task<TEntity?> GetAsync(TKey id);
+        // Get by Id overload
+        public Task<TEntity?> GetAsync(ISpecifications<TEntity, TKey> specifications);
         // Create
         Task AddAsync(TEntity entity);
         // Update
