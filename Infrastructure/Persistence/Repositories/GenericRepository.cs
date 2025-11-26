@@ -23,8 +23,16 @@ namespace Persistence.Repositories
         => asNoTracking ? await _dbContext.Set<TEntity>().AsNoTracking().ToListAsync()
                         : await _dbContext.Set<TEntity>().ToListAsync();
 
+        // GetAll that takes a specification
+        public async Task<IEnumerable<TEntity>> GetAllAsync(ISpecifications<TEntity, TKey> specifications)
+        => await SpecificationsEvaluator.GetQuery<TEntity, TKey>(_dbContext.Set<TEntity>(), specifications).ToListAsync();
+
         public async Task<TEntity?> GetAsync(TKey id) => await _dbContext.Set<TEntity>().FindAsync(id);
 
+        // Get that takes a specification
+        public async Task<TEntity?> GetAsync(ISpecifications<TEntity, TKey> specifications)
+        => await SpecificationsEvaluator.GetQuery<TEntity, TKey>(_dbContext.Set<TEntity>(), specifications).FirstOrDefaultAsync();
+        
         public async Task AddAsync(TEntity entity) => await _dbContext.Set<TEntity>().AddAsync(entity);
 
         public void Update(TEntity entity) => _dbContext.Set<TEntity>().Update(entity);
