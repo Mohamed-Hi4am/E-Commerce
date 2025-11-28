@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Entities.ProductModule;
 using Microsoft.IdentityModel.Tokens;
+using Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,30 @@ namespace Services.Specifications
     internal class ProductWithBrandAndTypeSpecifications: BaseSpecifications<Product, int>
     {
         // Scenario 1: we want to return all products with no filters
-        public ProductWithBrandAndTypeSpecifications() : base(null)
+        public ProductWithBrandAndTypeSpecifications(ProductSortingOptions sort) : base(null)
         {
             AddIncludes(P => P.ProductBrand);
             AddIncludes(P => P.ProductType);
+
+            switch (sort)
+            {
+                case ProductSortingOptions.NameAsc:
+                    SetOrderBy(P => P.Name);
+                    break;
+                case ProductSortingOptions.NameDesc:
+                    SetOrderByDescending(P => P.Name);
+                    break;
+                case ProductSortingOptions.PriceAsc:
+                    SetOrderBy(P => P.Price);
+                    break;
+                case ProductSortingOptions.PriceDesc:
+                    SetOrderByDescending(P => P.Price);
+                    break;
+                default:
+                    SetOrderBy(P => P.Name);
+                    // We made the default to sort by name asc, we can change it if we want
+                    break;
+            }
         }
 
         // Scenario 2: we want to return a specific product by Id
