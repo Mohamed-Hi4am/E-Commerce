@@ -4,6 +4,7 @@ using Domain.Entities.ProductModule;
 using Microsoft.IdentityModel.Tokens;
 using Services.Abstraction.Contracts;
 using Services.Specifications;
+using Shared;
 using Shared.Dtos;
 using Shared.Enums;
 using System;
@@ -28,9 +29,9 @@ namespace Services.Implementations
             return brandsResult;
         }
 
-        public async Task<IEnumerable<ProductResultDto>> GetAllProductsAsync(ProductSortingOptions sort, int? typeId, int? brandId)
+        public async Task<IEnumerable<ProductResultDto>> GetAllProductsAsync(ProductSpecParams parameters)
         {
-            var products = await _unitOfWork.GetRepository<Product, int>().GetAllAsync(new ProductWithBrandAndTypeSpecifications(sort, typeId, brandId));
+            var products = await _unitOfWork.GetRepository<Product, int>().GetAllAsync(new ProductWithBrandAndTypeSpecifications(parameters));
 
             var productsResult = _mapper.Map<IEnumerable<ProductResultDto>>(products);
 

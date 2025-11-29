@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Entities.ProductModule;
 using Microsoft.IdentityModel.Tokens;
+using Shared;
 using Shared.Enums;
 using System;
 using System.Collections.Generic;
@@ -13,16 +14,16 @@ namespace Services.Specifications
     internal class ProductWithBrandAndTypeSpecifications: BaseSpecifications<Product, int>
     {
         // Scenario 1: we want to return all products with no filters
-        public ProductWithBrandAndTypeSpecifications(ProductSortingOptions sort, int? typeId, int? brandId) :
-            base(produt =>
-                    (!typeId.HasValue || produt.TypeId == typeId.Value) &&
-                    (!brandId.HasValue || produt.BrandId == brandId.Value)
+        public ProductWithBrandAndTypeSpecifications(ProductSpecParams parameters) :
+            base(product =>
+                    (!parameters.TypeId.HasValue || product.TypeId == parameters.TypeId.Value) &&
+                    (!parameters.BrandId.HasValue || product.BrandId == parameters.BrandId.Value)
             )
         {
             AddIncludes(P => P.ProductBrand);
             AddIncludes(P => P.ProductType);
 
-            switch (sort)
+            switch (parameters.Sort)
             {
                 case ProductSortingOptions.NameAsc:
                     SetOrderBy(P => P.Name);
