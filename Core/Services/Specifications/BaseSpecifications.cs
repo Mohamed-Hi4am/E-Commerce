@@ -47,5 +47,21 @@ namespace Services.Specifications
             => OrderByDescending = orderByDescExpression;
         // This method will store something like this: P => NameDesc 
         #endregion
+
+        public int Skip { get; private set; }
+
+        public int Take { get; private set; }
+
+        public bool IsPaginated { get; private set; }
+
+        // Total Products = 18 ~ 20
+        // PageSize = 5
+        // PageIndex = 3
+        protected void ApplyPagination(int pageIndex, int pageSize)
+        {
+            IsPaginated = true;
+            Take = pageSize;
+            Skip = (pageIndex - 1) * pageSize;
+        }
     }
 }

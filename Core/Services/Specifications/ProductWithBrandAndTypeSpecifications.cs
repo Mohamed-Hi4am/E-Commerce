@@ -42,6 +42,8 @@ namespace Services.Specifications
                     // We made the default to sort by name asc, we can change it if we want
                     break;
             }
+
+            ApplyPagination(parameters.PageIndex, parameters.PageSize);
         }
 
         // Scenario 2: we want to return a specific product by Id
