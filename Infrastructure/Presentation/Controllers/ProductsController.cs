@@ -16,8 +16,8 @@ namespace Presentation.Controllers
     {
         #region Get All Products
         [HttpGet] // GET: BaseUrl/api/Products
-        public async Task<ActionResult<IEnumerable<ProductResultDto>>> GetAllProducts(ProductSortingOptions sort)
-            => Ok(await serviceManager.ProductService.GetAllProductsAsync(sort));
+        public async Task<ActionResult<IEnumerable<ProductResultDto>>> GetAllProducts(ProductSortingOptions sort, int? typeId, int? brandId)
+            => Ok(await serviceManager.ProductService.GetAllProductsAsync(sort, typeId, brandId));
         #endregion
 
         #region Get All Brands

@@ -13,7 +13,11 @@ namespace Services.Specifications
     internal class ProductWithBrandAndTypeSpecifications: BaseSpecifications<Product, int>
     {
         // Scenario 1: we want to return all products with no filters
-        public ProductWithBrandAndTypeSpecifications(ProductSortingOptions sort) : base(null)
+        public ProductWithBrandAndTypeSpecifications(ProductSortingOptions sort, int? typeId, int? brandId) :
+            base(produt =>
+                    (!typeId.HasValue || produt.TypeId == typeId.Value) &&
+                    (!brandId.HasValue || produt.BrandId == brandId.Value)
+            )
         {
             AddIncludes(P => P.ProductBrand);
             AddIncludes(P => P.ProductType);
