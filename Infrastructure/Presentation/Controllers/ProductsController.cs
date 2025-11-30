@@ -17,7 +17,7 @@ namespace Presentation.Controllers
     {
         #region Get All Products
         [HttpGet] // GET: BaseUrl/api/Products
-        public async Task<ActionResult<IEnumerable<ProductResultDto>>> GetAllProducts([FromQuery] ProductSpecParams parameters)
+        public async Task<ActionResult<PaginatedResult<ProductResultDto>>> GetAllProducts([FromQuery] ProductSpecParams parameters)
             => Ok(await serviceManager.ProductService.GetAllProductsAsync(parameters));
         #endregion
 
