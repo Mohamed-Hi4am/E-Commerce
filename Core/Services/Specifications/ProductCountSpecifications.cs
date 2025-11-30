@@ -10,9 +10,11 @@ namespace Services.Specifications
 {
     internal class ProductCountSpecifications : BaseSpecifications<Product, int>
     {
-        public ProductCountSpecifications(ProductSpecParams parameters) : base(produt
-            => (!parameters.TypeId.HasValue || produt.TypeId == parameters.TypeId.Value)
-            && (!parameters.BrandId.HasValue || produt.BrandId == parameters.BrandId.Value))
+        public ProductCountSpecifications(ProductSpecParams parameters) : base(product
+            => (!parameters.TypeId.HasValue || product.TypeId == parameters.TypeId.Value)
+            && (!parameters.BrandId.HasValue || product.BrandId == parameters.BrandId.Value)
+            && (string.IsNullOrWhiteSpace(parameters.Search) || product.Name.ToLower().Contains
+               (parameters.Search.ToLower().Trim())))
         {
 
         }

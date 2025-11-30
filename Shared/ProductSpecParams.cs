@@ -22,6 +22,8 @@ namespace Shared
 
         private int pageSize = DefaultPageSize;
 
+        public string? Search { get; set; }
+        
         public int PageSize
         {
             get => pageSize;

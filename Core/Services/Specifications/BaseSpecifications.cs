@@ -48,6 +48,7 @@ namespace Services.Specifications
         // This method will store something like this: P => NameDesc 
         #endregion
 
+        #region Pagination
         public int Skip { get; private set; }
 
         public int Take { get; private set; }
@@ -62,6 +63,7 @@ namespace Services.Specifications
             IsPaginated = true;
             Take = pageSize;
             Skip = (pageIndex - 1) * pageSize;
-        }
+        } 
+        #endregion
     }
 }
