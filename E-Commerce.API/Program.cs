@@ -1,5 +1,6 @@
 
 using Domain.Contracts;
+using E_Commerce.API.MiddleWares;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Data;
 using Persistence.Repositories;
@@ -40,6 +41,9 @@ namespace E_Commerce.API
 
             #region Configure Kestrel MiddleWares
             // Configure the HTTP request pipeline.
+
+            app.UseMiddleware<GlobalErrorHandelingMiddleware>();
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
