@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Domain.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce.API.MiddleWares
 {
@@ -19,6 +20,8 @@ namespace E_Commerce.API.MiddleWares
             try
             {
                 await _next.Invoke(httpContext);
+                if (httpContext.Response.StatusCode == StatusCodes.Status404NotFound)
+                    await HandelNotFoundEndPointAsync(httpContext);
             }
             catch (Exception exception)
             {
@@ -28,20 +31,36 @@ namespace E_Commerce.API.MiddleWares
             }
         }
 
-        private async Task HandelExceptionAsync(HttpContext httpContext, Exception
-        exception)
+        private async Task HandelExceptionAsync(HttpContext httpContext, Exception exception)
         {
-            httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
-
-            var problem = new ProblemDetails()
+            var Problem = new ProblemDetails()
             {
-                Title = "Internal Server Error",
+                Title = "Error While Processing The HTTP Request",
                 Detail = exception.Message,
-                Status = StatusCodes.Status500InternalServerError,
+                Instance = httpContext.Request.Path,
+                Status = exception switch
+                {
+                    NotFoundException => StatusCodes.Status404NotFound,
+                    _ => StatusCodes.Status500InternalServerError
+                }
+            };
+
+            httpContext.Response.StatusCode = Problem.Status.Value;
+
+            await httpContext.Response.WriteAsJsonAsync(Problem);
+        }
+
+        private async Task HandelNotFoundEndPointAsync(HttpContext httpContext)
+        {
+            var Response = new ProblemDetails()
+            {
+                Title = "Error While Processing The Request - EndPoint Not Found",
+                Detail = $"The Endpoint {httpContext.Request.Path} is Not found",
+                Status = StatusCodes.Status404NotFound,
                 Instance = httpContext.Request.Path
             };
 
-            await httpContext.Response.WriteAsJsonAsync(problem);
+            await httpContext.Response.WriteAsJsonAsync(Response);
         }
     }
 }
