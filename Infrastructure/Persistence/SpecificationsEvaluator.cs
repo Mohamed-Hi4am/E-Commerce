@@ -27,6 +27,15 @@ namespace Persistence
                                                                 currentQuery.Include(includeExpression));
             //like: Prodcuts.Where(P => P.Id == 5).Include(P => P.ProductType).Include(P => P.ProductBrand)
 
+            if (specifications.OrderBy is not null)
+                query = query.OrderBy(specifications.OrderBy);
+
+            else if (specifications.OrderByDescending is not null)
+                query = query.OrderByDescending(specifications.OrderByDescending);
+
+            if (specifications.IsPaginated)
+                query = query.Skip(specifications.Skip).Take(specifications.Take);
+
             return query;
         }
     }

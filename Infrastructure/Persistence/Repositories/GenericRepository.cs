@@ -32,12 +32,15 @@ namespace Persistence.Repositories
         // Get that takes a specification
         public async Task<TEntity?> GetAsync(ISpecifications<TEntity, TKey> specifications)
         => await SpecificationsEvaluator.GetQuery<TEntity, TKey>(_dbContext.Set<TEntity>(), specifications).FirstOrDefaultAsync();
-        
+
+        //Count items
+        public async Task<int> CountAsync(ISpecifications<TEntity, TKey> specifications)
+        => await SpecificationsEvaluator.GetQuery(_dbContext.Set<TEntity>(), specifications).CountAsync();
+
         public async Task AddAsync(TEntity entity) => await _dbContext.Set<TEntity>().AddAsync(entity);
 
         public void Update(TEntity entity) => _dbContext.Set<TEntity>().Update(entity);
 
         public void Delete(TEntity entity) => _dbContext.Set<TEntity>().Remove(entity);
-
     }
 }

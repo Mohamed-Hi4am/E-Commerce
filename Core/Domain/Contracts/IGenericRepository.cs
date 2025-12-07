@@ -18,6 +18,10 @@ namespace Domain.Contracts
         Task<TEntity?> GetAsync(TKey id);
         // Get by Id overload
         public Task<TEntity?> GetAsync(ISpecifications<TEntity, TKey> specifications);
+
+        // Count items
+        public Task<int> CountAsync(ISpecifications<TEntity, TKey> specifications);
+
         // Create
         Task AddAsync(TEntity entity);
         // Update
