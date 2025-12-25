@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce.API.MiddleWares
 {
-    public class GlobalErrorHandelingMiddleware
+    public class GlobalErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger<GlobalErrorHandelingMiddleware> _logger;
+        private readonly ILogger<GlobalErrorHandlingMiddleware> _logger;
 
-        public GlobalErrorHandelingMiddleware(RequestDelegate next,
-            ILogger<GlobalErrorHandelingMiddleware> logger)
+        public GlobalErrorHandlingMiddleware(RequestDelegate next,
+            ILogger<GlobalErrorHandlingMiddleware> logger)
         {
             _next = next;
             _logger = logger;
