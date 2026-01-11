@@ -12,9 +12,7 @@ using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductsController(IServiceManager serviceManager) : ControllerBase
+    public class ProductsController(IServiceManager serviceManager) : ApiControllerBase
     {
         #region Get All Products
         [HttpGet] // GET: BaseUrl/api/Products
@@ -36,9 +34,6 @@ namespace Presentation.Controllers
 
         #region Get Product By Id
         [ProducesResponseType(typeof(ProductResultDto), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         [HttpGet("{id:int}")] // GET: BaseUrl/api/Products/id
         public async Task<ActionResult<ProductResultDto>> GetProduct(int id)
             => Ok(await serviceManager.ProductService.GetProductByIdAsync(id));
