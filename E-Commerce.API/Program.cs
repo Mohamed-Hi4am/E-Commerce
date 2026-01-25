@@ -1,5 +1,6 @@
 
 using Domain.Contracts;
+using E_Commerce.API.Extensions;
 using E_Commerce.API.Factories;
 using E_Commerce.API.MiddleWares;
 using Microsoft.AspNetCore.Mvc;
@@ -19,41 +20,30 @@ namespace E_Commerce.API
             var builder = WebApplication.CreateBuilder(args);
 
             #region Configure Services (DI Container)
-            // Add services to the container.
-            builder.Services.AddDbContext<StoreDbContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-            });
-            builder.Services.AddControllers();
-            builder.Services.AddScoped<IDbInitializer, DbInitializer>();
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            builder.Services.AddScoped<IServiceManager, ServiceManager>();
-
-            builder.Services.AddAutoMapper(o => { }, typeof(AssemblyReference).Assembly);
-
-            builder.Services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.InvalidModelStateResponseFactory = ApiResponseFactory.CustomValidationErrorResponse;
-            });
             
-            // Swagger
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(); 
+            // Add services to the container.
+            
+            builder.Services.AddWebApisServices();
+
+            builder.Services.AddInfrastructureServices(builder.Configuration);
+
+            builder.Services.AddCoreServices();
+
             #endregion
 
             var app = builder.Build();
 
-            await InitializeDbAsync(app);
-
             #region Configure Kestrel MiddleWares
+            
             // Configure the HTTP request pipeline.
 
-            app.UseMiddleware<GlobalErrorHandelingMiddleware>();
+            app.UseCustomExceptionMiddlewares();
+
+            await app.SeedDbAsync();
 
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerMiddlewares();
             }
 
             app.UseHttpsRedirection();
@@ -62,19 +52,12 @@ namespace E_Commerce.API
 
             app.UseAuthorization();
 
-            app.MapControllers(); 
+            app.MapControllers();
+
             #endregion
 
             app.Run();
 
-            async Task InitializeDbAsync(WebApplication app)
-            {
-                using var scope = app.Services.CreateScope();
-
-                var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
-
-                await dbInitializer.InitializeAsync();
-            }
         }
     }
 }

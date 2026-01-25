@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Services.Abstraction.Contracts;
 using Shared;
-using Shared.Dtos;
+using Shared.Dtos.ProductModule;
 using Shared.Enums;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,7 @@ using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductsController(IServiceManager serviceManager) : ControllerBase
+    public class ProductsController(IServiceManager serviceManager) : ApiControllerBase
     {
         #region Get All Products
         [HttpGet] // GET: BaseUrl/api/Products
@@ -34,6 +33,7 @@ namespace Presentation.Controllers
         #endregion
 
         #region Get Product By Id
+        [ProducesResponseType(typeof(ProductResultDto), StatusCodes.Status200OK)]
         [HttpGet("{id:int}")] // GET: BaseUrl/api/Products/id
         public async Task<ActionResult<ProductResultDto>> GetProduct(int id)
             => Ok(await serviceManager.ProductService.GetProductByIdAsync(id));
