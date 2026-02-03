@@ -13,6 +13,8 @@ namespace E_Commerce.API.Extensions
 
             await dbInitializer.InitializeAsync();
 
+            await dbInitializer.InitializeIdentityAsync();
+
             return app;
         }
 
