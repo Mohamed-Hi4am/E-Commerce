@@ -22,12 +22,10 @@ namespace Services.Implementations
 
             if (user == null)
                 throw new UnAuthorizedException($"Email {loginDto.Email} is not Exist.");
-            // We will create this exception type below
 
             // Check If Password Is Correct
             var result = await _userManager.CheckPasswordAsync(user,
             loginDto.Password);
-            // This function returns boolean
 
             if (!result)
                 throw new UnAuthorizedException();
@@ -52,7 +50,7 @@ namespace Services.Implementations
             {
                 var errors = result.Errors.Select(error => error.Description).ToList();
                 throw new ValidationException(errors);
-                // We will create this exception type below
+                
             }
 
             // Return user & create token
