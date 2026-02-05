@@ -21,17 +21,17 @@ namespace E_Commerce.API.MiddleWares
             {
                 await _next.Invoke(httpContext);
                 if (httpContext.Response.StatusCode == StatusCodes.Status404NotFound)
-                    await HandelNotFoundEndPointAsync(httpContext);
+                    await HandleNotFoundEndPointAsync(httpContext);
             }
             catch (Exception exception)
             {
                 _logger.LogError(exception, "Something Went Wrong");
 
-                await HandelExceptionAsync(httpContext, exception);
+                await HandleExceptionAsync(httpContext, exception);
             }
         }
 
-        private async Task HandelExceptionAsync(HttpContext httpContext, Exception exception)
+        private async Task HandleExceptionAsync(HttpContext httpContext, Exception exception)
         {
             var Problem = new ProblemDetails()
             {
@@ -41,16 +41,23 @@ namespace E_Commerce.API.MiddleWares
                 Status = exception switch
                 {
                     NotFoundException => StatusCodes.Status404NotFound,
+                    UnAuthorizedException => StatusCodes.Status401Unauthorized,
+                    ValidationException => StatusCodes.Status400BadRequest,
                     _ => StatusCodes.Status500InternalServerError
                 }
             };
+
+            if (exception is ValidationException validationExceptioin)
+            {
+                Problem.Extensions.Add("Errors", validationExceptioin.Errors);
+            }
 
             httpContext.Response.StatusCode = Problem.Status.Value;
 
             await httpContext.Response.WriteAsJsonAsync(Problem);
         }
 
-        private async Task HandelNotFoundEndPointAsync(HttpContext httpContext)
+        private async Task HandleNotFoundEndPointAsync(HttpContext httpContext)
         {
             var Response = new ProblemDetails()
             {
