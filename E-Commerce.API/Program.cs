@@ -27,7 +27,7 @@ namespace E_Commerce.API
 
             builder.Services.AddInfrastructureServices(builder.Configuration);
 
-            builder.Services.AddCoreServices();
+            builder.Services.AddCoreServices(builder.Configuration);
 
             #endregion
 
@@ -49,6 +49,8 @@ namespace E_Commerce.API
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

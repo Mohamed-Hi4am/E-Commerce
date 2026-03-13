@@ -1,12 +1,16 @@
 ﻿using Domain.Contracts;
 using Domain.Entities.IdentityModule;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Persistence.Data;
 using Persistence.Identity;
 using Persistence.Repositories;
+using Shared;
 using StackExchange.Redis;
+using System.Text;
 
 namespace E_Commerce.API.Extensions
 {
@@ -31,6 +35,8 @@ namespace E_Commerce.API.Extensions
             services.AddSingleton<IConnectionMultiplexer>( _ => ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis")!));
 
             services.ConfigureIdentityServices();
+            
+            services.ConfigureJwt(configuration);
 
             return services;
         }
@@ -47,6 +53,38 @@ namespace E_Commerce.API.Extensions
 
                 options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<StoreIdentityContext>();
+
+            return services;
+        }
+
+        public static IServiceCollection ConfigureJwt(this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            var jwtOptions = configuration.GetSection("JwtOptions").Get<JwtOptions>();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = true,
+                    ValidateIssuer = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+
+                    ValidAudience = jwtOptions!.Audience,
+                    ValidIssuer = jwtOptions.Issuer,
+                    IssuerSigningKey = new
+                    SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.SecretKey))
+                };
+
+            });
+
+            services.AddAuthorization();
 
             return services;
         }
