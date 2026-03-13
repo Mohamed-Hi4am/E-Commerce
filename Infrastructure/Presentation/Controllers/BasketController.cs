@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Abstraction.Contracts;
 using Shared.Dtos.BasketModule;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
+    [Authorize]
     public class BasketController(IServiceManager serviceManager) : ApiControllerBase
     {
         [ProducesResponseType(typeof(BasketDTO), StatusCodes.Status200OK)]
