@@ -64,9 +64,11 @@ namespace Services.Implementations
             return mapper.Map<OrderResult>(order);
         }
 
-        public Task<IEnumerable<DeliveryMethodResult>> GetDeliveryMethodsAsync()
+        public async Task<IEnumerable<DeliveryMethodResult>> GetDeliveryMethodsAsync()
         {
-            throw new NotImplementedException();
+            var methods = await unitOfWork.GetRepository<DeliveryMethod, int>().GetAllAsync();
+
+            return mapper.Map<IEnumerable<DeliveryMethodResult>>(methods);
         }
 
         public Task<OrderResult> GetOrderByIdAsync(Guid id)
