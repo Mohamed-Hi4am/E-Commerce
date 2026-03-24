@@ -14,5 +14,4 @@ namespace Shared.Dtos.OrderModule
         public string City { get; init; } = string.Empty;
         public string Country { get; init; } = string.Empty;
     }
-
 }
