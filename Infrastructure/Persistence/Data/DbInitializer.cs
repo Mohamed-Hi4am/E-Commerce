@@ -1,5 +1,6 @@
 ﻿using Domain.Contracts;
 using Domain.Entities.IdentityModule;
+using Domain.Entities.OrderModule;
 using Domain.Entities.ProductModule;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -96,6 +97,21 @@ namespace Persistence.Data
                         // await _dbContext.SaveChangesAsync();
                     }
 
+                }
+
+                if (!_dbContext.DeliveryMethods.Any())
+                {
+                    // Read Products From File As String
+                    var methodsData = await File.ReadAllTextAsync(@"..\Infrastructure\Persistence\Data\DataSeeding\delivery.json");
+
+                    // Transform From Json into C# Object
+                    var methods = JsonSerializer.Deserialize<List<DeliveryMethod>>(methodsData);
+
+                    // Add Products Into DB & Save Changes
+                    if (methods is not null && methods.Any())
+                    {
+                        await _dbContext.DeliveryMethods.AddRangeAsync(methods);
+                    }
                 }
 
                 await _dbContext.SaveChangesAsync();
