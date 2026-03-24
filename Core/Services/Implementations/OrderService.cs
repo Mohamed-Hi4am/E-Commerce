@@ -5,6 +5,7 @@ using Domain.Entities.OrderModule;
 using Domain.Entities.ProductModule;
 using Domain.Exceptions;
 using Services.Abstraction.Contracts;
+using Services.Specifications;
 using Shared.Dtos.OrderModule;
 using System;
 using System.Collections.Generic;
@@ -71,14 +72,21 @@ namespace Services.Implementations
             return mapper.Map<IEnumerable<DeliveryMethodResult>>(methods);
         }
 
-        public Task<OrderResult> GetOrderByIdAsync(Guid id)
+        public async Task<OrderResult> GetOrderByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var order = await unitOfWork.GetRepository<Order, Guid>()
+                                        .GetAsync(new OrderWithIncludeSpecifications(id))
+                                        ?? throw new OrderNotFoundException(id);
+
+            return mapper.Map<OrderResult>(order);
         }
 
-        public Task<IEnumerable<OrderResult>> GetOrdersByEmailAsync(string email)
+        public async Task<IEnumerable<OrderResult>> GetOrdersByEmailAsync(string email)
         {
-            throw new NotImplementedException();
+            var orders = await unitOfWork.GetRepository<Order, Guid>()
+                                         .GetAllAsync(new OrderWithIncludeSpecifications(email));
+
+            return mapper.Map<IEnumerable<OrderResult>>(orders);
         }
 
         private OrderItem CreateOrderItem(BasketItem item, Product product)
