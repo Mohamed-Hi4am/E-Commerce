@@ -18,5 +18,4 @@ namespace Domain.Entities.BasketModule
 
         public int Quantity { get; set; }
     }
-
 }
