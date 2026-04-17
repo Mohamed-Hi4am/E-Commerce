@@ -46,17 +46,25 @@ namespace Services.Implementations
                                 .GetAsync(request.DeliveryMethodId)
                                 ?? throw new DeliveryMethodException(request.DeliveryMethodId);
 
-            // 4. Sub Total -- > item.price + item.quantity
+            // 4. Sub Total --> item.price * item.quantity
+
+            var orderRepo = unitOfWork.GetRepository<Order, Guid>();
+
+            var exsitingOrder = await orderRepo.
+                GetAsync(new OrderWithPaymentIntentSepcifications(basket.PaymentIntentId!));
+
+            if (exsitingOrder is not null)
+                orderRepo.Delete(exsitingOrder);
 
             var subTotal = orderItems.Sum(item => item.Price * item.Quantity);
 
             // 5. Create Order
 
-            var order = new Order(userEmail, address, orderItems, deliveryMethod, subTotal);
+            var order = new Order(userEmail, address, orderItems, deliveryMethod, subTotal, basket.PaymentIntentId!);
 
             // Save at DB
 
-            await unitOfWork.GetRepository<Order, Guid>().AddAsync(order);
+            await orderRepo.AddAsync(order);
 
             await unitOfWork.SaveChangesAsync();
 
