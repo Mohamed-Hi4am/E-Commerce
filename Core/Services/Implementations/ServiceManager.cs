@@ -2,6 +2,7 @@
 using Domain.Contracts;
 using Domain.Entities.IdentityModule;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Services.Abstraction.Contracts;
 using Shared;
@@ -17,6 +18,7 @@ namespace Services.Implementations
         IUnitOfWork unitOfWork,
         IMapper mapper,
         IBasketRepository basketRepository,
+        IConfiguration configuration,
         IOptions<JwtOptions> options,
         UserManager<User> userManager) : IServiceManager
     {
@@ -30,6 +32,8 @@ namespace Services.Implementations
 
         private readonly Lazy<IOrderService> _orderService = new Lazy<IOrderService>(() => new OrderService(mapper, basketRepository, unitOfWork));
 
+        private readonly Lazy<IPaymentService> _paymentService = new Lazy<IPaymentService>(() => new PaymentService(configuration, basketRepository, unitOfWork, mapper));
+
         public IProductService ProductService => _productService.Value;
 
         public IBasketService BasketService => _basketService.Value;
@@ -37,5 +41,7 @@ namespace Services.Implementations
         public IAuthenticationService AuthenticationService => _authenticationService.Value;
 
         public IOrderService OrderService => _orderService.Value;
+
+        public IPaymentService PaymentService => _paymentService.Value;
     }
 }
