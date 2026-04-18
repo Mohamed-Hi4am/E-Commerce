@@ -16,7 +16,7 @@ namespace Shared.Dtos.OrderModule
         
         public ICollection<OrderItemDto> OrderItems { get; init; } = new List<OrderItemDto>();
 
-        public string PaymentStatus { get; init; }
+        public string Status { get; init; }
 
         public string DeliveryMethod { get; init; }
 

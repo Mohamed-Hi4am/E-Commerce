@@ -21,7 +21,7 @@ namespace Services.Implementations
         {
             // 1. Shipping Address
 
-            var address = mapper.Map<ShippingAddress>(request.ShippingAddress);
+            var address = mapper.Map<ShippingAddress>(request.ShipToAddress);
 
             // 2. OrderItems => BasketId --> BasketItems --> OrderItems
 
