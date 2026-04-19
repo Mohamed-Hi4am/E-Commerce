@@ -21,7 +21,6 @@ namespace Persistence.Repositories
             var isCreatedOrUpdated = await _database.StringSetAsync(basket.Id, jsonBasket, timeToLive ?? TimeSpan.FromDays(30));
 
             return isCreatedOrUpdated ? await GetBasketAsync(basket.Id) : null;
-
         }
 
         public async Task<bool> DeleteBasketAsync(string id)

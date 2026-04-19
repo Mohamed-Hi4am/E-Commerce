@@ -44,6 +44,15 @@ namespace E_Commerce.API.Extensions
                 });
             });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("Development", builder =>
+                {
+                    builder.AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .AllowAnyOrigin();
+                });
+            });
 
             return services;
         }

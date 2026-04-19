@@ -50,6 +50,8 @@ namespace E_Commerce.API
 
             app.UseStaticFiles();
 
+            app.UseCors("Development");
+
             app.UseAuthentication();
 
             app.UseAuthorization();
