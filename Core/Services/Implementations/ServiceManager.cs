@@ -20,7 +20,7 @@ namespace Services.Implementations
         IBasketRepository basketRepository,
         IConfiguration configuration,
         IOptions<JwtOptions> options,
-        UserManager<User> userManager) : IServiceManager
+        UserManager<User> userManager) /*: IServiceManager*/
     {
         private readonly Lazy<IProductService> _productService =
             new Lazy<IProductService>(() => new ProductService(unitOfWork, mapper));

@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Services.Implementations
 {
-    internal class OrderService(IMapper mapper, IBasketRepository basketRepository, IUnitOfWork unitOfWork) : IOrderService
+    public class OrderService(IMapper mapper, IBasketRepository basketRepository, IUnitOfWork unitOfWork) : IOrderService
     {
         public async Task<OrderResult> CreateOrderAsync(OrderRequest request, string userEmail)
         {

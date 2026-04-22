@@ -17,7 +17,7 @@ using Product = Domain.Entities.ProductModule.Product;
 
 namespace Services.Implementations
 {
-    internal class PaymentService(IConfiguration configuration,
+    public class PaymentService(IConfiguration configuration,
         IBasketRepository basketRepository,
         IUnitOfWork unitOfWork,
         IMapper mapper) : IPaymentService
