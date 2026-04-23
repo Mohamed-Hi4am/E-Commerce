@@ -27,12 +27,16 @@ namespace E_Commerce.API.Extensions
             services.AddScoped<Func<IPaymentService>>(provider =>
             () => provider.GetRequiredService<IPaymentService>());
 
+            services.AddScoped<Func<ICacheService>>(provider =>
+            () => provider.GetRequiredService<ICacheService>());
+
             services.AddScoped<IServiceManager, ServiceManagerWithFactoryDelegate>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IBasketService, BasketService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<ICacheService, CacheService>();
 
             services.AddAutoMapper(o => { }, typeof(AssemblyReference).Assembly);
 
