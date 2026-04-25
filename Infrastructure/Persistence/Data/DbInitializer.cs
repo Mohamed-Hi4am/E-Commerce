@@ -32,13 +32,12 @@ namespace Persistence.Data
             try
             {
                 // Create the database if it doesn't exist & apply any pending migrations
-
                 if (_dbContext.Database.GetPendingMigrations().Any())
                     await _dbContext.Database.MigrateAsync();
 
 
                 // Apply Data seeding
-
+                
                 if (!_dbContext.ProductTypes.Any())
                 {
                     // Read Types From File As String
@@ -125,10 +124,15 @@ namespace Persistence.Data
 
         public async Task InitializeIdentityAsync()
         {
+
+            // Create the database if it doesn't exist & apply any pending migrations
+            if (_dbContext.Database.GetPendingMigrations().Any())
+                await _dbContext.Database.MigrateAsync();
+
+
             // Set Default Users & Roles
 
             // Seed Roles
-
             if (!_roleManager.Roles.Any())
             {
                 // Admin & SuperAdmin
@@ -137,7 +141,6 @@ namespace Persistence.Data
             }
 
             // Seed Users
-
             if (!_userManager.Users.Any())
             {
                 var adminUser = new User()
