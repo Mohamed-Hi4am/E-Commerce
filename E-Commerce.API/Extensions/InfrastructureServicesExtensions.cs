@@ -47,9 +47,9 @@ namespace E_Commerce.API.Extensions
             services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequiredLength = 8;
 
                 options.User.RequireUniqueEmail = true;

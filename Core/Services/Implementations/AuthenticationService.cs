@@ -51,7 +51,7 @@ namespace Services.Implementations
             {
                 Email = registerDto.Email,
                 DisplayName = registerDto.DisplayName,
-                UserName = registerDto.DisplayName,
+                UserName = registerDto.UserName ?? registerDto.Email,
                 PhoneNumber = registerDto.PhoneNumber,
             };
 
