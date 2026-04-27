@@ -36,6 +36,7 @@ namespace Presentation.Controllers
 
         #region Get Product By Id
         [ProducesResponseType(typeof(ProductResultDto), StatusCodes.Status200OK)]
+        [RedisCache]
         [HttpGet("{id:int}")] // GET: BaseUrl/api/Products/id
         public async Task<ActionResult<ProductResultDto>> GetProduct(int id)
             => Ok(await serviceManager.ProductService.GetProductByIdAsync(id));
