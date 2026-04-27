@@ -21,10 +21,11 @@ namespace Shared.Dtos.OrderModule
         public string DeliveryMethod { get; init; }
 
         public int? DeliveryMethodId { get; init; }
-        
+
+        public decimal DeliveryCost { get; set; }
+
         public decimal Subtotal { get; init; }
 
-        // Payment --- > Required For Later
         public string PaymentIntentId { get; init; } = string.Empty;
 
         public DateTimeOffset OrderDate { get; init; } = DateTimeOffset.Now;

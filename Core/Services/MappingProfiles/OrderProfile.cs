@@ -29,11 +29,10 @@ namespace Services.MappingProfiles
             CreateMap<Order, OrderResult>()
             .ForMember(d => d.Status, o => o.MapFrom(s => s.PaymentStatus))
             .ForMember(d => d.DeliveryMethod, o => o.MapFrom(s => s.DeliveryMethod.ShortName))
+            .ForMember(d => d.DeliveryCost, o => o.MapFrom(s => s.DeliveryMethod.Price))
             .ForMember(d => d.Total, o => o.MapFrom(s => s.Subtotal + s.DeliveryMethod.Price));
 
             CreateMap<DeliveryMethod, DeliveryMethodResult>().ForMember(d => d.Cost, o => o.MapFrom(s => s.Price));
         }
-
     }
-
 }
