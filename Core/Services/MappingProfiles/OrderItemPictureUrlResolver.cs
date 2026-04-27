@@ -23,7 +23,7 @@ namespace Services.MappingProfiles
             // BaseUrl + source.PictureUrl
             // https://localhost:7081+ images/products/ItalianChickenMarinade.png
 
-            return $"{configuration["BaseUrl"]} {source.Product.PictureUrl}";
+            return $"{configuration["BaseUrl"]}{source.Product.PictureUrl}";
         }
     }
 }
