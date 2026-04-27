@@ -8,20 +8,23 @@ using System.Threading.Tasks;
 namespace Services.Implementations
 {
     public class ServiceManagerWithFactoryDelegate(
-        Func<IAuthenticationService> authenticationService,
-        Func<IProductService> productService,
-        Func<IBasketService> basketService,
-        Func<IOrderService> orderService,
-        Func<IPaymentService> paymentService) : IServiceManager
+        Func<IAuthenticationService> authenticationFactory,
+        Func<IProductService> productFactory,
+        Func<IBasketService> basketFactory,
+        Func<IOrderService> orderFactory,
+        Func<IPaymentService> paymentFactory,
+        Func<ICacheService> cacheFactory) : IServiceManager
     {
-        public IAuthenticationService AuthenticationService => authenticationService.Invoke();
+        public IAuthenticationService AuthenticationService => authenticationFactory.Invoke();
 
-        public IProductService ProductService => productService.Invoke();
+        public IProductService ProductService => productFactory.Invoke();
 
-        public IBasketService BasketService => basketService.Invoke();
+        public IBasketService BasketService => basketFactory.Invoke();
 
-        public IOrderService OrderService => orderService.Invoke();
+        public IOrderService OrderService => orderFactory.Invoke();
 
-        public IPaymentService PaymentService => paymentService.Invoke();
+        public IPaymentService PaymentService => paymentFactory.Invoke();
+
+        public ICacheService CacheService => cacheFactory.Invoke();
     }
 }
