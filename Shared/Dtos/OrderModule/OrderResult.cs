@@ -22,7 +22,7 @@ namespace Shared.Dtos.OrderModule
 
         public int? DeliveryMethodId { get; init; }
 
-        public decimal DeliveryCost { get; set; }
+        public decimal DeliveryCost { get; init; }
 
         public decimal Subtotal { get; init; }
 

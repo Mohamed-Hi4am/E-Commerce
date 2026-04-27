@@ -28,7 +28,7 @@ namespace Presentation.Attributes
                 context.Result = new ContentResult
                 {
                     Content = result,
-                    ContentType = "Application/Json",
+                    ContentType = "application/Json",
                     StatusCode = StatusCodes.Status200OK
                 };
 
