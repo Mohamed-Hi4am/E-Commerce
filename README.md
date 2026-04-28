@@ -189,22 +189,22 @@ API available at: `https://localhost:7202/swagger`
 
 ### 7. Run the Angular Frontend
 
-1. Install Node.js version 16
+- Install Node.js version 16
 
-2. Install Angular 11.2.14
+- Install Angular 11.2.14
 ```bash
 npm i -g  @angular/cli@11.2.14
 ```
 
-3. Create a directory for the Angular project and open it using `VS Code` (or something like it)
+- Create a directory for the Angular project and open it using `VS Code` (or something like it)
 
-4. Open a terminal and clone the Angular project:
+- Open a terminal and clone the Angular project:
 ```bash
 git clone https://github.com/Mohamed-Hi4am/E-Commerce-Frontend-Project.git
 cd client
 ```
 
-5. Navigate to the `src` folder -> `environments` folder -> `environment.ts` file, and link your backend project in `apiUrl`:
+- Navigate to the `src` folder -> `environments` folder -> `environment.ts` file, and link your backend project in `apiUrl`:
 ```bash
 export const environment = {
   production: false,
@@ -212,12 +212,12 @@ export const environment = {
 }; 
 ```
 
-6. Navigate to the `src` folder -> `app` folder -> `checkout` folder -> `checkout-payment` folder -> `checkout-payment.component.ts`, and put your app's Stripe account publishable key in this line:
+- Navigate to the `src` folder -> `app` folder -> `checkout` folder -> `checkout-payment` folder -> `checkout-payment.component.ts`, and put your app's Stripe account publishable key in this line:
 ```bash
 this.stripe = Stripe('PUT_YOUR_SECRET_KEY_HERE');
 ```
 
-7. Open a new terminal and run the project
+- Open a new terminal and run the project
 ```bash
 cd client
 ng serve -o
