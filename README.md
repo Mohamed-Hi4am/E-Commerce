@@ -3,6 +3,8 @@
 A complete e-commerce solution built with **ASP.NET Core 8** (Onion Architecture) as the backend, and **Angular** as the customer-facing frontend. This application integrates with **Redis** as the caching service, and **Stripe** as the payment service.
 
 ---
+## 📽️Live Demo
+Here is a Video Live Demo trying the project: [Live Demo Video](https://youtu.be/_oASqkC0Sf0?si=MrKtbyFSN2kFSRAj)
 
 ## 📸 Project Screenshots
 
@@ -157,9 +159,9 @@ In the `E-Commerce.API/appsettings.json` or `secrets.json` files:
 
 ### 4. Run the local Redis database
 
-### 5. Set up the Stripe CLI (either by "Scoop" package manager or any other method)
+### 5. Set up the Stripe CLI
 
-- After setting up Stripe CLI, run these commands in the PowerShell to login to your Stripe account, then activate the Stripe CLI listener to listen to Stripe
+- After setting up Stripe CLI (either by "Scoop" package manager or any other method), run these commands in the PowerShell to login to your Stripe account, then activate the Stripe CLI listener to listen to Stripe
 ```bash
 stripe login
 stripe listen -f https://localhost:7057/api/payments/webhook -e payment_intent.succeeded,payment_intent.payment_failed
