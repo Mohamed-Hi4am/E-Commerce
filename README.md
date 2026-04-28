@@ -9,20 +9,20 @@ A complete e-commerce solution built with **ASP.NET Core 8** (Onion Architecture
 ### Customer Frontend (Angular)
 | Shop Page | Authentication |
 |---|---|
-| <img width="1872" height="881" alt="Shop Page" src="https://github.com/user-attachments/assets/a90888ed-5de0-46a4-b39e-cf5dc0e3503d" /> | <img width="1897" height="883" alt="Authentication" src="https://github.com/user-attachments/assets/e43b36d3-5f7b-467f-897b-55634723ac0c" /> |
+| <img width="100%" alt="Shop Page" src="https://github.com/user-attachments/assets/a90888ed-5de0-46a4-b39e-cf5dc0e3503d" /> | <img width="100%" alt="Authentication" src="https://github.com/user-attachments/assets/e43b36d3-5f7b-467f-897b-55634723ac0c" /> |
 
 | Basket (Cart) | Checkout |
 |---|---|
-| <img width="1870" height="881" alt="Basket (Cart)" src="https://github.com/user-attachments/assets/29980dac-19c5-487b-ae49-321bfcb0d6a8" /> | <img width="1872" height="883" alt="Checkout" src="https://github.com/user-attachments/assets/f58d9ad3-53af-4916-831b-ae22cb3cba46" /> |
+| <img width="100%" alt="Basket (Cart)" src="https://github.com/user-attachments/assets/29980dac-19c5-487b-ae49-321bfcb0d6a8" /> | <img width="100%" alt="Checkout" src="https://github.com/user-attachments/assets/f58d9ad3-53af-4916-831b-ae22cb3cba46" /> |
 
 | Order Confirmation | Orders Tracking |
 |---|---|
-| <img width="1892" height="882" alt="Order Confirmation" src="https://github.com/user-attachments/assets/ab4c67cb-8ed3-4f68-a952-35f5a746a1fb" /> | <img width="1892" height="881" alt="Order Tracking" src="https://github.com/user-attachments/assets/3b16371d-36c3-44b3-9468-b51c2f48b1d5" /> |
+| <img width="100%" alt="Order Confirmation" src="https://github.com/user-attachments/assets/ab4c67cb-8ed3-4f68-a952-35f5a746a1fb" /> | <img width="100%" alt="Order Tracking" src="https://github.com/user-attachments/assets/3b16371d-36c3-44b3-9468-b51c2f48b1d5" /> |
 
 ### API Documentation
 | Swagger UI |
 |---|
-| <img width="1731" height="2069" alt="Swagger UI" src="https://github.com/user-attachments/assets/7033ecc8-bb5f-442f-a3da-e235e3ff6404" /> |
+| <img width="100%" alt="Swagger UI" src="https://github.com/user-attachments/assets/7033ecc8-bb5f-442f-a3da-e235e3ff6404" /> |
 
 ---
 
@@ -51,7 +51,7 @@ E-Commerce/
 ### Architecture Flow
 
 ```
-`Client Request` ➔ `Middleware (Auth/Error Handling)` ➔ `API Controller` ➔ `Service Logic` ➔ `Repository/Unit of Work` ➔ `Database/Redis/Stripe` ➔ `Response to Client`
+Client Request ➔ Middleware (Auth/Error Handling) ➔ API Controller ➔ Service Logic ➔ Repository/Unit of Work ➔ Database/Redis/Stripe ➔ Response to Client
 ```
 
 ---
