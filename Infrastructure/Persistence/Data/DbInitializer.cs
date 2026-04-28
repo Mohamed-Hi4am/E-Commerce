@@ -147,7 +147,7 @@ namespace Persistence.Data
                 {
                     DisplayName = "Admin",
                     Email = "Admin@gmail.com",
-                    UserName = "Admin",
+                    UserName = "Admin@gmail.com",
                     PhoneNumber = "0123456789"
                 };
 
@@ -156,13 +156,13 @@ namespace Persistence.Data
                 {
                     DisplayName = "Super Admin",
                     Email = "SuperAdmin@gmail.com",
-                    UserName = "SuperAdmin",
+                    UserName = "SuperAdmin@gmail.com",
                     PhoneNumber = "0123456789"
                 };
     
 
-                await _userManager.CreateAsync(adminUser, "Passw0rd");
-                await _userManager.CreateAsync(superAdminUser, "Passw0rd");
+                await _userManager.CreateAsync(adminUser, "Passw0rd#");
+                await _userManager.CreateAsync(superAdminUser, "Passw0rd#");
 
                 // Assign Role To Users
                 await _userManager.AddToRoleAsync(adminUser, "Admin");
