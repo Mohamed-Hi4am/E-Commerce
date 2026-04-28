@@ -22,9 +22,10 @@ namespace Persistence.Data
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public DbInitializer(StoreDbContext dbContext, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public DbInitializer(StoreDbContext dbContext, StoreIdentityContext identityContext, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             _dbContext = dbContext;
+            _identityContext = identityContext;
             _userManager = userManager;
             _roleManager = roleManager;
         }
