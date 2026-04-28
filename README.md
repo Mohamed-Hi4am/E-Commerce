@@ -9,9 +9,7 @@ A complete e-commerce solution built with **ASP.NET Core 8** (Onion Architecture
 ### Customer Frontend (Angular)
 | Shop Page | Authentication |
 |---|---|
-| ![Shop Page](<img width="1872" height="881" alt="Shop Page" src="https://github.com/user-attachments/assets/a90888ed-5de0-46a4-b39e-cf5dc0e3503d" />
-) | ![Authentication](<img width="1897" height="883" alt="Authentication" src="https://github.com/user-attachments/assets/e43b36d3-5f7b-467f-897b-55634723ac0c" />
-) |
+| [Shop Page](<img width="1872" height="881" alt="Shop Page" src="https://github.com/user-attachments/assets/a90888ed-5de0-46a4-b39e-cf5dc0e3503d" />) | [Authentication](<img width="1897" height="883" alt="Authentication" src="https://github.com/user-attachments/assets/e43b36d3-5f7b-467f-897b-55634723ac0c" />) |
 
 | Basket (Cart) | Checkout |
 |---|---|
@@ -192,12 +190,20 @@ API available at: `https://localhost:7202/swagger`
 ### 7. Run the Angular Frontend
 
 1. Install Node.js version 16
+
 2. Install Angular 11.2.14
 ```bash
 npm i -g  @angular/cli@11.2.14
 ```
-3. Download the Angular project from here: 
-4. Open the Angular client directory using `VS Code` (or something like it)
+
+3. Create a directory for the Angular project and open it using `VS Code` (or something like it)
+
+4. Open a terminal and clone the Angular project:
+```bash
+git clone https://github.com/Mohamed-Hi4am/E-Commerce-Frontend-Project.git
+cd client
+```
+
 5. Navigate to the `src` folder -> `environments` folder -> `environment.ts` file, and link your backend project in `apiUrl`:
 ```bash
 export const environment = {
@@ -205,10 +211,12 @@ export const environment = {
   apiUrl: 'https://localhost:7057/api/'
 }; 
 ```
+
 6. Navigate to the `src` folder -> `app` folder -> `checkout` folder -> `checkout-payment` folder -> `checkout-payment.component.ts`, and put your app's Stripe account publishable key in this line:
 ```bash
 this.stripe = Stripe('PUT_YOUR_SECRET_KEY_HERE');
 ```
+
 7. Open a new terminal and run the project
 ```bash
 cd client
