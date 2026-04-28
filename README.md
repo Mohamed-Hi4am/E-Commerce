@@ -104,7 +104,7 @@ Client Request ➔ Middleware (Auth/Error Handling) ➔ API Controller ➔ Servi
 - **Specification Pattern** for flexible query composition
 - **Global Exception Handling Middleware**
 - **Onion Architecture** with dependency injection
-- **Data Seeding** for initial products, brands, types, and delivery methods
+- **Facade** with Lazy Loading for services instances and dependencies
 
 ---
 
