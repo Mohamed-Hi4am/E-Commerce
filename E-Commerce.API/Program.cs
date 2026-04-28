@@ -12,7 +12,7 @@ namespace E_Commerce.API
             
             // Add services to the container.
             
-            builder.Services.AddWebApisServices();
+            builder.Services.AddWebApisServices(builder.Configuration);
 
             builder.Services.AddInfrastructureServices(builder.Configuration);
 
@@ -39,7 +39,15 @@ namespace E_Commerce.API
 
             app.UseStaticFiles();
 
-            app.UseCors("Development");
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseCors("Development");
+
+            }
+            else
+            {
+                app.UseCors("Production");
+            }
 
             app.UseAuthentication();
 

@@ -6,7 +6,7 @@ namespace E_Commerce.API.Extensions
 {
     public static class WebApisServicesExtensions
     {
-        public static IServiceCollection AddWebApisServices(this IServiceCollection services)
+        public static IServiceCollection AddWebApisServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllers();
             services.Configure<ApiBehaviorOptions>(options =>
@@ -43,6 +43,8 @@ namespace E_Commerce.API.Extensions
                 });
             });
 
+            var allowedOrigins = configuration.GetSection("AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
+
             services.AddCors(options =>
             {
                 options.AddPolicy("Development", builder =>
@@ -50,6 +52,13 @@ namespace E_Commerce.API.Extensions
                     builder.AllowAnyHeader()
                            .AllowAnyMethod()
                            .AllowAnyOrigin();
+                });
+
+                options.AddPolicy("Production", builder =>
+                {
+                    builder.WithOrigins(allowedOrigins)
+                           .AllowAnyHeader()
+                           .AllowAnyMethod();
                 });
             });
 
