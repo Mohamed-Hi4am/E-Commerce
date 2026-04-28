@@ -3,8 +3,8 @@
 A complete e-commerce solution built with **ASP.NET Core 8** (Onion Architecture) as the backend, and **Angular** as the customer-facing frontend. This application integrates with **Redis** as the caching service, and **Stripe** as the payment service.
 
 ---
-## 📽️Live Demo
-Here is a Video Live Demo trying the project: [Live Demo Video](https://youtu.be/_oASqkC0Sf0?si=MrKtbyFSN2kFSRAj)
+## 📽️ Live Demo
+**Here is a Live Demo Video operating the project: [Live Demo Video](https://youtu.be/_oASqkC0Sf0?si=MrKtbyFSN2kFSRAj)**
 
 ## 📸 Project Screenshots
 
