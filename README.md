@@ -204,7 +204,7 @@ git clone https://github.com/Mohamed-Hi4am/E-Commerce-Frontend-Project.git
 cd client
 ```
 
-- Navigate to the `src` folder -> `environments` folder -> `environment.ts` file, and link your backend project in `apiUrl`:
+- Navigate to `src` ➔ `environments` ➔ `environment.ts`, and link your backend project in `apiUrl`:
 ```bash
 export const environment = {
   production: false,
@@ -212,7 +212,7 @@ export const environment = {
 }; 
 ```
 
-- Navigate to the `src` folder -> `app` folder -> `checkout` folder -> `checkout-payment` folder -> `checkout-payment.component.ts`, and put your app's Stripe account publishable key in this line:
+- Navigate to `src` ➔ `app` ➔ `checkout` ➔ `checkout-payment` ➔ `checkout-payment.component.ts`, and put your app's Stripe account publishable key in this line:
 ```bash
 this.stripe = Stripe('PUT_YOUR_SECRET_KEY_HERE');
 ```
