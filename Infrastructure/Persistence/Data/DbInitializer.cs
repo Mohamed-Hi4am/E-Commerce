@@ -4,6 +4,7 @@ using Domain.Entities.OrderModule;
 using Domain.Entities.ProductModule;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Persistence.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace Persistence.Data
     public class DbInitializer : IDbInitializer
     {
         private readonly StoreDbContext _dbContext;
+        private readonly StoreIdentityContext _identityContext;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
@@ -126,8 +128,8 @@ namespace Persistence.Data
         {
 
             // Create the database if it doesn't exist & apply any pending migrations
-            if (_dbContext.Database.GetPendingMigrations().Any())
-                await _dbContext.Database.MigrateAsync();
+            if (_identityContext.Database.GetPendingMigrations().Any())
+                await _identityContext.Database.MigrateAsync();
 
 
             // Set Default Users & Roles
